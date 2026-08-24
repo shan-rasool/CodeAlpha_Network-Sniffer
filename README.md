@@ -139,8 +139,8 @@ CodeAlpha_BasicNetworkSniffer/
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-cd YOUR-REPOSITORY
+git clone https://github.com/shan-rasool/CodeAlpha_Network-Sniffer.git
+cd CodeAlpha_Network-Sniffer
 ```
 
 Or download the project as a ZIP file and extract it.
@@ -417,5 +417,5 @@ This project is available under the terms of the included MIT License.
 ---
 
 <p align="center">
-  Built for learning, experimentation, and authorized network analysis 🛡️
+  Built for learning, experimentation and authorized network analysis 🛡️
 </p>
