@@ -1,0 +1,25 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.egg-info/
+
+# Captured traffic (kept out of version control by default)
+captures/*.pcap
+captures/*.pcapng
+
+# Screenshots working files (keep placeholders, ignore large binaries if desired)
+# screenshots/*.png
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
