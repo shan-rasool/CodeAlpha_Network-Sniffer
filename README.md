@@ -1,324 +1,421 @@
-# Basic Network Sniffer
+# 🛡️ Basic Network Sniffer
 
-A professional, beginner-friendly **command-line network packet sniffer and analyzer** built in Python using **Scapy**. This project captures live network traffic on an authorized interface, analyzes packet structure, tracks protocol statistics, and can export captures to standard `.pcap` files for review in Wireshark.
+<p align="center">
+  <b>Real-Time Network Traffic Monitoring and Packet Analysis</b>
+</p>
 
-> ⚠️ **This tool is for educational purposes and authorized network monitoring only.** See the [Security and Ethical Use Disclaimer](#security-and-ethical-use-disclaimer) below before using it.
+<p align="center">
+  A Python-based network packet sniffer with a modern web dashboard for capturing, analyzing, filtering, and exporting network traffic.
+</p>
 
----
+<p align="center">
 
-## Table of Contents
+  ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+  ![Scapy](https://img.shields.io/badge/Scapy-Packet%20Analysis-orange)
+  ![Streamlit](https://img.shields.io/badge/Streamlit-Web%20Dashboard-red)
+  ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-green)
+  ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-1. [Internship Task Objective](#internship-task-objective)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Project Structure](#project-structure)
-5. [Installation Instructions](#installation-instructions)
-6. [Dependency Installation](#dependency-installation)
-7. [How to Run the Application](#how-to-run-the-application)
-8. [Example Usage](#example-usage)
-9. [Packet Fields Explained](#packet-fields-explained)
-10. [PCAP Export Instructions](#pcap-export-instructions)
-11. [Module Overview](#module-overview)
-12. [Screenshots](#screenshots)
-13. [Security and Ethical Use Disclaimer](#security-and-ethical-use-disclaimer)
-14. [Limitations](#limitations)
-15. [Future Improvements](#future-improvements)
-16. [Author](#author)
-17. [Internship Acknowledgment](#internship-acknowledgment)
+</p>
 
 ---
 
-## Internship Task Objective
+## 📌 About the Project
 
-This project was developed as part of a **CodeAlpha Cyber Security Internship Task**. The objective was to:
+**Basic Network Sniffer** is a Python-based cybersecurity project developed to capture and analyze network packets in real time.
 
-- Build a Python program capable of capturing live network traffic.
-- Analyze captured packets to understand their structure and content.
-- Demonstrate how data flows through a network and the basics of common network protocols (TCP, UDP, ICMP, ARP).
-- Use safe, well-established Python packet-capture libraries (Scapy).
-- Present captured information in a clean, readable, and professional format suitable for demonstration during an internship evaluation.
+The application combines a packet-capture backend built with **Scapy** and a modern interactive dashboard built with **Streamlit**. Users can select a network interface, capture live traffic, filter packets, inspect packet details, view protocol statistics, and export captured traffic to PCAP format.
 
----
+The project was developed as part of the **CodeAlpha Cyber Security Internship** task requirements.
 
-## Features
-
-- **Live Packet Capture** — capture packets in real time, with interface selection, a configurable packet count, or unlimited continuous capture (stoppable with `Ctrl+C`).
-- **Detailed Packet Analysis** — displays packet number, timestamp, source/destination IP, protocol, length, source/destination ports, TCP flags, and ICMP type/code.
-- **Protocol Recognition** — TCP, UDP, ICMP, ARP, and a catch-all "Other/Unknown" category.
-- **Live Protocol Statistics** — running counts of total, TCP, UDP, ICMP, ARP, and other packets, with a full summary printed when capture stops.
-- **Optional Payload Inspection** — safely previews readable payload bytes (length-limited, non-printable bytes masked), and never attempts to decrypt encrypted traffic.
-- **Packet Filtering** — filter live captures by protocol, source IP, destination IP, or port, with input validation and helpful error messages.
-- **PCAP Export** — save captured packets to a standard `.pcap` file (auto-creates the `captures/` folder, timestamped filenames), fully compatible with Wireshark.
-- **Clean Terminal Menu Interface** — professional, numbered menu designed for easy live demonstration.
-- **Robust Error Handling** — friendly messages instead of raw Python stack traces for missing dependencies, permission issues, invalid interfaces, invalid filters, and more.
+> ⚠️ **Authorized Use Only:** This project should only be used on systems and networks that you own or where you have explicit permission to monitor network traffic.
 
 ---
 
-## Technologies Used
+# ✨ Features
 
-- **Python 3** (3.8+)
-- **[Scapy](https://scapy.net/)** — packet crafting, sniffing, and PCAP I/O
-- Standard library modules: `os`, `re`, `string`, `datetime`, `dataclasses`
+### 📡 Live Packet Capture
+Capture network packets in real time from available network interfaces.
+
+### 🔢 Specific Packet Capture
+Capture a selected number of packets instead of running continuously.
+
+### 🌐 Network Interface Selection
+Refresh and select available network interfaces before starting a capture.
+
+### 🔎 Packet Filtering
+Filter captured traffic using:
+
+- Protocol
+- Source IP address
+- Destination IP address
+- Port number
+
+### 📊 Live Statistics
+Monitor packet statistics including:
+
+- Total packets
+- TCP packets
+- UDP packets
+- ICMP packets
+- ARP packets
+- Other packets
+- Total captured data
+
+### 📋 Packet Table
+Captured packets are displayed in a structured table containing useful information such as:
+
+- Packet number
+- Timestamp
+- Protocol
+- Source IP
+- Destination IP
+- Source port
+- Destination port
+- Packet length
+- TCP flags
+
+### 🔬 Detailed Packet Analysis
+Select an individual packet to view its detailed information.
+
+### 📦 Payload Inspection
+Optional payload inspection can be enabled when required.
+
+### 💾 PCAP Export
+Export captured packets to `.pcap` format for further analysis using tools such as Wireshark.
+
+### 🖥️ Modern Web Dashboard
+A Streamlit-based frontend provides an easy-to-use interface for controlling packet capture and viewing results.
 
 ---
 
-## Project Structure
+# 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Python | Core application development |
+| Scapy | Packet capture and packet analysis |
+| Streamlit | Interactive web frontend |
+| Npcap | Packet capture support on Windows |
+| PCAP | Standard packet capture file format |
+
+---
+
+# 📁 Project Structure
 
 ```text
 CodeAlpha_BasicNetworkSniffer/
 │
-├── main.py                  # Application entry point & interactive menu
-├── requirements.txt         # Python dependencies
-├── README.md                # Project documentation (this file)
-├── LICENSE                  # MIT License
-├── .gitignore                # Git ignore rules
+├── app.py                  # Streamlit web application
+├── main.py                 # Command-line application
+├── requirements.txt        # Project dependencies
+├── README.md               # Project documentation
+├── LICENSE                 # Project license
+├── .gitignore              # Git ignore rules
 │
 ├── src/
 │   ├── __init__.py
-│   ├── sniffer.py            # Core live capture engine (Scapy wrapper)
-│   ├── packet_analyzer.py    # Per-packet field extraction & formatting
-│   ├── filters.py            # Optional protocol/IP/port filtering
-│   ├── statistics.py         # Live protocol statistics tracking
-│   └── utils.py               # Shared helpers: formatting, validation, I/O
+│   ├── filters.py          # Packet filtering functionality
+│   ├── packet_analyzer.py  # Packet analysis and field extraction
+│   ├── sniffer.py          # Core packet capture functionality
+│   ├── statistics.py       # Capture statistics
+│   └── utils.py            # Utility functions
 │
-├── captures/                 # Saved .pcap files (auto-created)
-│   └── .gitkeep
+├── screenshots/
+│   ├── 01-dashboard-ready.png
+│   ├── 02-packet-capture.png
+│   ├── 03-live-statistics.png
+│   ├── 04-packet-details.png
+│   └── 05-terminal-capture.png
 │
-└── screenshots/               # Screenshots for documentation/portfolio
-    └── .gitkeep
+└── captures/
+    └── Saved PCAP capture files
 ```
 
 ---
 
-## Installation Instructions
+# 🚀 Installation
 
-### 1. Clone the repository
+## 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd CodeAlpha_BasicNetworkSniffer
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+cd YOUR-REPOSITORY
 ```
 
-### 2. (Recommended) Create a virtual environment
+Or download the project as a ZIP file and extract it.
+
+---
+
+## 2. Create a Virtual Environment
 
 ```bash
-python -m venv venv
+py -m venv venv
+```
 
-# Activate it:
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
+Activate it on Windows:
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+If you do not want to use a virtual environment, you can install the dependencies directly.
+
+---
+
+## 3. Install Dependencies
+
+```bash
+py -m pip install --upgrade pip
+py -m pip install -r requirements.txt
 ```
 
 ---
 
-## Dependency Installation
+# 🪟 Windows Requirement: Install Npcap
 
-Install all required dependencies:
+For live packet capture on Windows, **Npcap** is required.
 
-```bash
-pip install -r requirements.txt
-```
+During installation, make sure the packet capture driver is installed successfully.
 
-### Windows-specific requirement: Npcap
+After installation, restart your terminal if necessary.
 
-Scapy relies on a packet-capture driver to sniff live traffic. On **Windows**, you must install **[Npcap](https://npcap.com/#download)** (the modern replacement for WinPcap) before live capture will work:
-
-1. Download and run the Npcap installer from https://npcap.com/#download
-2. During installation, check **"Install Npcap in WinPcap API-compatible Mode"**.
-3. Restart your terminal after installation.
-
-On **Linux/macOS**, packet capture typically works out of the box using the system's native raw-socket capabilities, but requires elevated privileges (see below).
+> The application may also require Administrator privileges for live packet capture.
 
 ---
 
-## How to Run the Application
+# ▶️ Running the Web Dashboard
 
-### Windows
-
-Run your terminal **as Administrator**, then:
+From the project folder, run:
 
 ```bash
-python main.py
+py -m streamlit run app.py
 ```
 
-### Linux / macOS
+The application should open in your browser.
 
-Live packet capture requires raw socket access, so run with elevated privileges:
-
-```bash
-sudo python3 main.py
-```
-
-> Without elevated/administrator privileges, live capture will fail with a clear permission error message rather than crashing.
-
----
-
-## Example Usage
+By default, Streamlit commonly runs on:
 
 ```text
-=========================================
-       BASIC NETWORK SNIFFER
-=========================================
-
-==========================================
-  DISCLAIMER
-==========================================
-This project is intended only for educational purposes and authorized
-network monitoring. Do not capture or inspect traffic on networks or
-systems without explicit permission.
-==========================================
-
-
-1. Start Live Packet Capture
-2. Capture Specific Number of Packets
-3. Configure Packet Filter
-4. View Available Network Interfaces
-5. Enable/Disable Payload Inspection
-6. Save Capture to PCAP
-7. View Statistics
-8. Exit
-
-Enter your choice: 2
-Enter interface name (leave blank for default):
-Number of packets to capture: 5
-[INFO] Starting capture on interface: default | Count: 5 | No filter active (capturing all supported protocols).
-------------------------------------------------------------
-Packet #1  |  2026-08-24 10:15:02.481
-  Protocol   : TCP
-  Length     : 66 bytes
-  Source IP      : 192.168.1.12
-  Destination IP : 142.250.72.14
-  Source Port      : 51422
-  Destination Port : 443
-  TCP Flags  : SYN
-------------------------------------------------------------
-Packet #2  |  2026-08-24 10:15:02.512
-  Protocol   : ARP
-  Length     : 42 bytes
-  Source IP      : 192.168.1.1
-  Destination IP : 192.168.1.12
-------------------------------------------------------------
-...
-[OK] Capture complete. 5 packet(s) captured.
-==========================================
-           CAPTURE STATISTICS SUMMARY
-==========================================
-Total Packets Captured : 5
-  TCP Packets   : 3
-  UDP Packets   : 1
-  ICMP Packets  : 0
-  ARP Packets   : 1
-  Other Packets : 0
-Total Data Captured     : 312 B
-==========================================
+http://localhost:8501
 ```
 
 ---
 
-## Packet Fields Explained
+# 💻 Running the Command-Line Version
+
+The project also includes a terminal-based interface.
+
+Run:
+
+```bash
+py main.py
+```
+
+For live packet capture on Windows, run PowerShell or Command Prompt with appropriate privileges if required.
+
+---
+
+# 🧭 How to Use
+
+## Step 1 — Refresh Network Interfaces
+
+Click **Refresh Interfaces** to detect available network interfaces.
+
+## Step 2 — Select an Interface
+
+Choose the network interface you want to monitor.
+
+## Step 3 — Select Capture Mode
+
+Choose one of the available modes:
+
+- Continuous capture
+- Specific packet count
+
+## Step 4 — Configure Optional Filters
+
+You can filter traffic by:
+
+- Protocol
+- Source IP
+- Destination IP
+- Port
+
+## Step 5 — Start Capture
+
+Start the packet capture process.
+
+Captured packets will appear in the dashboard.
+
+## Step 6 — View Statistics
+
+Monitor the number and type of captured packets.
+
+## Step 7 — Inspect a Packet
+
+Select a packet to view detailed information such as IP addresses, ports, protocol, packet length, and TCP flags.
+
+## Step 8 — Export the Capture
+
+Export the captured session to a PCAP file for further analysis.
+
+---
+
+# 📸 Application Screenshots
+
+## 🏠 Dashboard Ready
+
+The application dashboard before packet capture begins.
+
+![Dashboard Ready](screenshots/01-dashboard-ready.png)
+
+---
+
+## 📡 Live Packet Capture
+
+The dashboard actively capturing network packets.
+
+![Packet Capture](screenshots/02-packet-capture.png)
+
+---
+
+## 📊 Live Statistics and Captured Packets
+
+Protocol statistics and captured packet information displayed in the application.
+
+![Live Statistics](screenshots/03-live-statistics.png)
+
+---
+
+## 🔬 Detailed Packet Analysis
+
+Detailed information for a selected captured packet.
+
+![Packet Details](screenshots/04-packet-details.png)
+
+---
+
+## 💻 Terminal Packet Capture
+
+The command-line version of the application successfully capturing and displaying network packets.
+
+![Terminal Capture](screenshots/05-terminal-capture.png)
+
+---
+
+# 📊 Packet Information
+
+The application can display information including:
 
 | Field | Description |
 |---|---|
-| **Packet Number** | Sequential index of the packet within the current capture session. |
-| **Timestamp** | Local date/time the packet was captured, to millisecond precision. |
-| **Source IP** | The IP address the packet originated from. |
-| **Destination IP** | The IP address the packet was sent to. |
-| **Protocol** | TCP, UDP, ICMP, ARP, or OTHER (unrecognized/unsupported protocol). |
-| **Length** | Total size of the packet in bytes. |
-| **Source Port / Destination Port** | Applicable only to TCP/UDP; identifies the sending/receiving application. |
-| **TCP Flags** | Decoded TCP control flags (e.g. SYN, ACK, FIN, PSH, RST, URG). |
-| **ICMP Type/Code** | Numeric ICMP message type and code (e.g. type 8 = Echo Request / "ping"). |
-| **Payload** | A safe, length-limited, readable preview of packet data (only shown when payload inspection is enabled). Non-printable bytes are masked, and encrypted/unavailable payloads are clearly labeled — the tool never attempts decryption. |
+| Packet Number | Sequential number of the captured packet |
+| Timestamp | Time when the packet was captured |
+| Protocol | Network protocol detected |
+| Source IP | IP address where the packet originated |
+| Destination IP | IP address receiving the packet |
+| Source Port | Originating TCP/UDP port |
+| Destination Port | Receiving TCP/UDP port |
+| Length | Packet size in bytes |
+| TCP Flags | TCP connection control flags |
+| ICMP Type | Type of ICMP packet when applicable |
+| ICMP Code | ICMP code when applicable |
 
 ---
 
-## PCAP Export Instructions
+# 🔐 Supported Protocols
 
-1. Run one or more capture sessions (menu option 1 or 2) so that packets are buffered in memory.
-2. Select **option 6 — "Save Capture to PCAP"** from the main menu.
-3. Optionally enter a custom filename, or press Enter to auto-generate one using the pattern:
+The application can identify and organize common protocols including:
 
-   ```text
-   captures/capture_YYYYMMDD_HHMMSS.pcap
-   ```
-
-   Example: `captures/capture_20260824_101502.pcap`
-
-4. The `captures/` directory is created automatically if it doesn't already exist.
-5. Open the resulting `.pcap` file directly in **[Wireshark](https://www.wireshark.org/)** for deeper protocol analysis.
+- TCP
+- UDP
+- ICMP
+- ARP
+- Other supported packet types
 
 ---
 
-## Module Overview
+# 💾 PCAP Export
 
-- **`main.py`** — The application's entry point. Renders the terminal menu, routes user choices to the appropriate handler functions, and wraps every action in error handling so the program never crashes into a raw traceback.
-- **`src/sniffer.py`** — The core capture engine. Wraps Scapy's `sniff()` function, manages the capture session (packet buffer, statistics, active filter, payload-inspection toggle), lists available interfaces, and exports captures to `.pcap` via `wrpcap()`.
-- **`src/packet_analyzer.py`** — Inspects each raw Scapy packet layer-by-layer (ARP, IP, TCP, UDP, ICMP, Raw) and produces a structured `PacketInfo` object with all display-ready fields, including a safely-rendered payload preview.
-- **`src/filters.py`** — Defines the `PacketFilter` data structure and interactive configuration flow. Supports both post-capture matching (`matches()`) and conversion to a BPF filter string (`to_bpf_string()`) for efficient kernel-level filtering during `sniff()`.
-- **`src/statistics.py`** — Tracks running per-protocol packet counts and total bytes captured, and renders a clean summary report at the end of a session.
-- **`src/utils.py`** — Shared helpers: terminal banners/menus, timestamp formatting, safe payload rendering, byte-size formatting, IP/port/protocol validation, and directory creation.
+Captured packets can be exported to a standard `.pcap` file.
 
----
+These files can be opened using network analysis tools such as Wireshark for further inspection.
 
-## Screenshots
+Example:
 
-> Add screenshots of the running application here for your GitHub repository / portfolio / LinkedIn video. Suggested shots:
-
-- `screenshots/01_main_menu.png` — the main menu on startup
-- `screenshots/02_live_capture.png` — a live capture session in progress
-- `screenshots/03_statistics_summary.png` — the statistics summary after stopping a capture
-- `screenshots/04_filter_configuration.png` — configuring a protocol/IP/port filter
-- `screenshots/05_pcap_export.png` — saving a capture to `.pcap` and the confirmation message
-- `screenshots/06_wireshark_open.png` — the exported `.pcap` file opened in Wireshark
+```text
+captures/capture_YYYYMMDD_HHMMSS.pcap
+```
 
 ---
 
-## Security and Ethical Use Disclaimer
+# ⚠️ Security and Ethical Use
 
-> This project is intended only for educational purposes and authorized network monitoring. Do not capture or inspect traffic on networks or systems without explicit permission.
+This project is intended strictly for:
 
-This tool:
+- Educational purposes
+- Personal learning
+- Lab environments
+- Authorized security testing
+- Networks and systems owned by the user
+- Networks where explicit permission has been granted
 
-- Is designed for use on **your own computer**, a **lab/test environment**, or a network where you have **explicit, documented permission** to monitor traffic.
-- Does **not** include any features for credential theft, stealthy/covert interception, bypassing security controls, or unauthorized surveillance.
-- Never attempts to decrypt encrypted payloads; it only displays what is already visible on the wire.
-- Should be used in compliance with all applicable local laws, organizational policies, and terms of service.
+Do **not** use this application to monitor, intercept, or inspect network traffic without authorization.
 
-Unauthorized network interception may be illegal in your jurisdiction. **You are solely responsible for ensuring you have proper authorization before running this tool on any network.**
-
----
-
-## Limitations
-
-- Requires elevated/administrator privileges to perform live packet capture (an inherent OS/driver requirement, not a design flaw).
-- On Windows, requires the Npcap driver to be installed separately.
-- Payload inspection shows only a truncated, readable preview — it is not a full protocol reconstruction tool (e.g. it does not reassemble TCP streams or reconstruct files).
-- IPv6 addresses are captured at the IP-layer level but detailed IPv6-specific extension headers are not separately parsed.
-- Designed for learning and demonstration; not intended to replace production-grade tools like Wireshark or tcpdump for professional network forensics.
+The project is designed as an educational network analysis tool and does not attempt to bypass security controls or decrypt encrypted traffic.
 
 ---
 
-## Future Improvements
+# ⚙️ Limitations
 
-- Add a graphical user interface (GUI) or web dashboard for live visualization.
-- Support TCP stream reassembly for more complete payload/session viewing.
-- Add geolocation lookups for public IP addresses.
-- Add alerting/notification rules (e.g. flag unusual traffic spikes or port-scan patterns).
-- Support reading and re-analyzing existing `.pcap` files, not just live capture.
-- Add automated unit tests and CI integration.
-
----
-
-## Author
-
-**[Your Name Here]**
-Cyber Security Intern — CodeAlpha
-[Your GitHub Profile / LinkedIn / Portfolio Link]
+- Live packet capture may require Administrator or elevated privileges.
+- Windows systems require Npcap for packet capture functionality.
+- Encrypted traffic cannot be decrypted by the application.
+- The tool is designed for educational use and is not intended to replace enterprise network analysis platforms.
+- Packet visibility depends on the selected interface and network environment.
 
 ---
 
-## Internship Acknowledgment
+# 🔮 Future Improvements
 
-This project, **BasicNetworkSniffer**, was developed as part of the **CodeAlpha Cyber Security Internship Program**, fulfilling the task requirements to build a live network packet sniffer and analyzer using Python and Scapy for educational and authorized-use purposes.
+Possible future improvements include:
+
+- IPv6-specific packet analysis
+- Advanced traffic visualization
+- Graphs and charts for protocol activity
+- Suspicious traffic alerts
+- Port scan detection
+- PCAP file upload and offline analysis
+- Search functionality for captured packets
+- Dark/light dashboard themes
+- Automated anomaly detection
+
+---
+
+# 👨‍💻 Internship Task
+
+This project was developed for the **Basic Network Sniffer** task of the CodeAlpha Cyber Security Internship.
+
+The main objective of the task was to:
+
+- Capture network traffic packets
+- Analyze packet structure and content
+- Understand network communication
+- Identify protocols
+- Display source and destination information
+- Work with packet capture libraries such as Scapy
+
+The completed project extends these core requirements with filtering, statistics, PCAP export, detailed packet analysis, and a web-based dashboard. :contentReference[oaicite:1]{index=1}
+
+---
+
+# 📄 License
+
+This project is available under the terms of the included MIT License.
+
+---
+
+<p align="center">
+  Built for learning, experimentation, and authorized network analysis 🛡️
+</p>
